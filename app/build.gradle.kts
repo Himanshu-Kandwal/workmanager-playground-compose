@@ -66,4 +66,19 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //work manager Kotlin + coroutines
+    implementation(libs.androidx.work.runtime.ktx)
+
+    /*
+
+        // ViewModel
+        implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+        // ViewModel utilities for Compose
+        implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.2.0"
+        // LiveData
+        implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    */
+
+
 }
