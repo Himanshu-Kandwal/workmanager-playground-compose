@@ -61,7 +61,9 @@ fun startWork(ctx: Context) {
             Toast.makeText(ctx, "Work Started", Toast.LENGTH_SHORT).show()
         }
         if (it.state.isFinished) {
-            Toast.makeText(ctx, "Work Finished", Toast.LENGTH_SHORT).show()
+            val outputData = it.outputData.getLong(Constants.WORKER_OUTPUT_KEY, 0)
+            Toast.makeText(ctx, "Work Finished in $outputData milliseconds", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }
