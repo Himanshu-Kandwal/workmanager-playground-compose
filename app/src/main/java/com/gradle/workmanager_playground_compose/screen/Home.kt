@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.work.OneTimeWorkRequest
-import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.gradle.workmanager_playground_compose.backgroundworker.BackgroundWorker
 import com.gradle.workmanager_playground_compose.components.StartWorkButton
@@ -40,7 +40,17 @@ fun HomeScreenPreview() {
 }
 
 fun startWork(ctx: Context) {
-    Toast.makeText(ctx, "Work Started", Toast.LENGTH_SHORT).show()
+    val workManager = WorkManager.getInstance(ctx)
     val workRequest = OneTimeWorkRequest.Builder(BackgroundWorker::class.java).build()
-    WorkManager.getInstance(ctx).enqueue(workRequest)
+    workManager.enqueue(workRequest)
+    //observing is work is done or not
+    workManager.getWorkInfoByIdLiveData(workRequest.id).observeForever {
+
+        if (it.state == WorkInfo.State.RUNNING) {
+            Toast.makeText(ctx, "Work Started", Toast.LENGTH_SHORT).show()
+        }
+        if (it.state.isFinished) {
+            Toast.makeText(ctx, "Work Finished", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
