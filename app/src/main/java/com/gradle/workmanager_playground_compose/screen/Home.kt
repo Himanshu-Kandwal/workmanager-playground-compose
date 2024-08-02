@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
@@ -41,7 +42,12 @@ fun HomeScreenPreview() {
 
 fun startWork(ctx: Context) {
     val workManager = WorkManager.getInstance(ctx)
-    val workRequest = OneTimeWorkRequest.Builder(BackgroundWorker::class.java).build()
+
+    val constraints =
+        Constraints.Builder().setRequiresCharging(true).setRequiresBatteryNotLow(true).build()
+
+    val workRequest =
+        OneTimeWorkRequest.Builder(BackgroundWorker::class.java).setConstraints(constraints).build()
     workManager.enqueue(workRequest)
     //observing is work is done or not
     workManager.getWorkInfoByIdLiveData(workRequest.id).observeForever {

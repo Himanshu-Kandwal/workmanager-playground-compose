@@ -13,6 +13,9 @@ class BackgroundWorker(context: Context, workerParams: WorkerParameters) : Worke
     override fun doWork(): Result {
         try {
             for (i in 1..10) {
+                if(isStopped){ //check if work manager got cancelled due to constraints,
+                    return Result.failure() //cancel it manually as it does not cancel automatically
+                }
                 Log.d("WorkerTAG", "doWork: $i")
                 Thread.sleep(1000)
             }
