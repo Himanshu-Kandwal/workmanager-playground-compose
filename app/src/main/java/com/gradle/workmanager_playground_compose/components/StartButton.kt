@@ -5,18 +5,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun StartButton(modifier: Modifier = Modifier.fillMaxWidth(0.9f)) {
-    val ctx = LocalContext.current
-    Button(modifier = modifier,
-        onClick = {
-            Toast.makeText(ctx, "Button clicked!", Toast.LENGTH_SHORT).show()
-        },
+fun StartWorkButton(onClick: () -> Unit) {
+    Button(
+        modifier = Modifier.fillMaxWidth(0.9f),
+        onClick = onClick,
     ) {
         Text(text = "Start Work")
     }
@@ -24,6 +21,7 @@ fun StartButton(modifier: Modifier = Modifier.fillMaxWidth(0.9f)) {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun StartButtonPreview() {
-    StartButton()
+fun StartWorkButtonPreview() {
+    val ctx = LocalContext.current
+    StartWorkButton({ Toast.makeText(ctx, "Clicked", Toast.LENGTH_SHORT).show() })
 }
