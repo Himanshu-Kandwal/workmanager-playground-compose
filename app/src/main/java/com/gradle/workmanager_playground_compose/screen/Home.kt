@@ -40,7 +40,14 @@ fun HomeScreenPreview() {
 }
 
 fun startWork(ctx: Context) {
+    val workManager = WorkManager.getInstance(ctx)
     Toast.makeText(ctx, "Work Started", Toast.LENGTH_SHORT).show()
     val workRequest = OneTimeWorkRequest.Builder(BackgroundWorker::class.java).build()
-    WorkManager.getInstance(ctx).enqueue(workRequest)
+    workManager.enqueue(workRequest)
+    //observing is work is done or not
+    workManager.getWorkInfoByIdLiveData(workRequest.id).observeForever {
+        if (it.state.isFinished) {
+            Toast.makeText(ctx, "Work Finished", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
