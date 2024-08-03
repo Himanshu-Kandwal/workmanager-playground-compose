@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">workmanager-playground-compose</string>
+    <string name="title_activity_chained_work">ChainedWorkActivity</string>
 </resources>

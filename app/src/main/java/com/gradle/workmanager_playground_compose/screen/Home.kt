@@ -1,11 +1,13 @@
 package com.gradle.workmanager_playground_compose.screen
 
 import android.content.Context
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,6 +21,7 @@ import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
+import com.gradle.workmanager_playground_compose.activity.ChainedWorkActivity
 import com.gradle.workmanager_playground_compose.backgroundworker.BackgroundWorker
 import com.gradle.workmanager_playground_compose.components.StartWorkButton
 import com.gradle.workmanager_playground_compose.util.Constants
@@ -32,6 +35,12 @@ fun HomeScreen() {
         Spacer(modifier = Modifier.height(200.dp))
         StartWorkButton {
             startWork(ctx)
+        }
+        Spacer(modifier = Modifier.height(200.dp))
+        Button(onClick = {
+            ctx.startActivity(Intent(ctx, ChainedWorkActivity::class.java))
+        }) {
+            Text(text = "Open Next Page")
         }
     }
 }
