@@ -22,6 +22,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.gradle.workmanager_playground_compose.activity.ChainedWorkActivity
+import com.gradle.workmanager_playground_compose.activity.PeriodicWorkActivity
 import com.gradle.workmanager_playground_compose.backgroundworker.BackgroundWorker
 import com.gradle.workmanager_playground_compose.components.StartWorkButton
 import com.gradle.workmanager_playground_compose.util.Constants
@@ -41,6 +42,11 @@ fun HomeScreen() {
             ctx.startActivity(Intent(ctx, ChainedWorkActivity::class.java))
         }) {
             Text(text = "Open Next Page")
+        }
+        Button(onClick = {
+            ctx.startActivity(Intent(ctx, PeriodicWorkActivity::class.java))
+        }) {
+            Text(text = "Perodic Request Screen")
         }
     }
 }
